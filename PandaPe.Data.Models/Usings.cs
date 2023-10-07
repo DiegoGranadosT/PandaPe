@@ -1,0 +1,1 @@
+﻿global using PandaPe.Data.Models.Base;
