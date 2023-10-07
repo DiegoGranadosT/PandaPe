@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PandaPe.Data.Application.Feature.CandidateExperiences.Commands;
 using PandaPe.Data.Application.Feature.CandidateExperiences.Queries;
- 
+using PandaPe.UI.Shared.ViewModels;
 
-namespace PandaPe.UI.WebApi.Controllers
+namespace PandaPe.UI.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,8 +16,8 @@ namespace PandaPe.UI.WebApi.Controllers
 
         public CandidateExperienceController(ILogger<CandidateExperienceController> logger, IMediator mediator)
         {
-            this._logger = logger;
-            this._mediator = mediator;
+            _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet]

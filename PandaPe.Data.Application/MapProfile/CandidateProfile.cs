@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PandaPe.Data.Application.Feature.Candidates.Commands;
-using PandaPe.Data.Application.ViewModels;
+ 
 using PandaPe.Data.Models.Entities;
 using PandaPe.Data.Models.EntityBases;
 using System;

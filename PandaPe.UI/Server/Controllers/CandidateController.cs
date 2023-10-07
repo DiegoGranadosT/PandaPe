@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PandaPe.Data.Application.Feature.CandidateExperiences.Queries;
 using PandaPe.Data.Application.Feature.Candidates.Commands;
 using PandaPe.Data.Application.Feature.Candidates.Queries;
- 
+using PandaPe.UI.Shared.ViewModels;
 
-namespace PandaPe.UI.WebApi.Controllers
+namespace PandaPe.UI.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,12 +17,12 @@ namespace PandaPe.UI.WebApi.Controllers
 
         public CandidateController(ILogger<CandidateController> logger, IMediator mediator)
         {
-            this._logger = logger;
-            this._mediator = mediator;
+            _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<CandidateViewModel>>> GetAll([FromQuery] AllCandidateQuery request) 
+        public async Task<ActionResult<List<CandidateViewModel>>> GetAll([FromQuery] AllCandidateQuery request)
         {
             try
             {
@@ -34,9 +35,9 @@ namespace PandaPe.UI.WebApi.Controllers
                 throw ex;
             }
         }
-        
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<CandidateViewModel>> GetById(int id) 
+        public async Task<ActionResult<CandidateViewModel>> GetById(int id)
         {
             try
             {
@@ -64,7 +65,7 @@ namespace PandaPe.UI.WebApi.Controllers
                 throw ex;
             }
         }
-        
+
         [HttpPut]
         public async Task<ActionResult<CandidateViewModel>> Update(UpdateCandidateCommand request)
         {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PandaPe.Data.Application.Contracts.Persistence.Repositories;
-using PandaPe.Data.Application.ViewModels;
+ 
 using PandaPe.Data.Models.Entities;
 using PandaPe.Data.Models.EntityBases;
 using System;

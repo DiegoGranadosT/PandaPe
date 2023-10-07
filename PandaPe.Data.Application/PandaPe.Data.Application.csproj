@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PandaPe.Data.Models\PandaPe.Data.Models.csproj" />
+    <ProjectReference Include="..\PandaPe.UI\Shared\PandaPe.UI.Shared.csproj" />
   </ItemGroup>
 
 </Project>

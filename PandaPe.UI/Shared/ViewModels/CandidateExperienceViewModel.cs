@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PandaPe.Data.Application.ViewModels
+namespace PandaPe.UI.Shared.ViewModels
 {
     public class CandidateExperienceViewModel : CandidateExperienceBase
     {

@@ -1,0 +1,41 @@
+﻿@using PandaPe.UI.Shared.ViewModels;
+@page "/"
+@inject HttpClient Http
+
+@if (candidates == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo Electronico</th>
+                <th>Fecha de nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in candidates)
+            {
+                <tr>
+                    <td>@forecast.Name</td>
+                    <td>@forecast.Surname</td>
+                    <td>@forecast.Email</td>
+                    <td>@forecast.Birthdate.ToString("dd/MM/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<CandidateViewModel>? candidates;
+
+    protected override async Task OnInitializedAsync()
+    {
+        candidates = await Http.GetFromJsonAsync<List<CandidateViewModel>>("api/Candidate");
+    }
+}
