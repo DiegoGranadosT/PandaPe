@@ -1,0 +1,18 @@
+﻿@using PandaPe.UI.Shared.ViewModels;
+@page "/candidate/{Id}"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+<Info Disabled="true" candidate="Candidate"></Info>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private CandidateViewModel Candidate;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Candidate = await Http.GetFromJsonAsync<CandidateViewModel>($"api/Candidate/{Id}") ?? new CandidateViewModel();
+    }
+}

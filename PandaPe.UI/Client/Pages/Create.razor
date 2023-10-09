@@ -1,0 +1,109 @@
+﻿@using PandaPe.UI.Shared.ViewModels;
+@page "/candidate/create"
+@inject HttpClient Http
+@inject NavigationManager Nav
+
+
+<h1>Crear un candidato</h1>
+<EditForm Model="candidate" OnValidSubmit="Submit">
+    <div class="card p-3">
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">Nombre</label>
+                <InputText type="text" class="form-control" placeholder="Carlos" @bind-Value="@candidate.Name" required />
+            </div>
+            <div class="col-6">
+                <label class="form-label">Apellido</label>
+                <InputText type="text" class="form-control" placeholder="Lopez" @bind-Value="@candidate.Surname" required />
+            </div>
+            <div class="col-6">
+                <label class="form-label">Fecha de nacimiento</label>
+                <InputDate TValue="DateTime" @bind-Value="@candidate.Birthdate" />
+            </div>
+            <div class="col-6">
+                <label class="form-label">Correo electronico</label>
+                <InputText type="email" class="form-control" placeholder="mail@example.com" @bind-Value="@candidate.Email" required />
+            </div>
+        </div>
+    </div>
+    <div class="card p-3">
+        <h2>Experiencias</h2>
+
+        @if (candidate.CandidateExperiences != null && candidate.CandidateExperiences.Count > 0)
+        {
+            @foreach (var candidateExperience in candidate.CandidateExperiences)
+            {
+                <div class="card p-3">
+
+                    <div class="row">
+                        <div class="col-10 row">
+                            <div class="col-6">
+                                <label class="form-label">Empresa</label>
+                                <InputText type="text" class="form-control" @bind-Value="@candidateExperience.Company" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Cargo</label>
+                                <InputText type="text" class="form-control" @bind-Value="@candidateExperience.Job" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Descripcion</label>
+                                <InputText type="text" class="form-control" @bind-Value="@candidateExperience.Description" required />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Salario</label>
+                                <InputNumber type="number" step="any" @bind-Value="@candidateExperience.Salary" max="99999999" min="1" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Fecha de inicio</label>
+                                <InputDate TValue="DateTime" @bind-Value="@candidateExperience.BeginDate" />
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Fecha de fin</label>
+                                <InputDate TValue="DateTime?" @bind-Value="@candidateExperience.EndDate" />
+                            </div>
+                        </div>
+                        <div class="col-2 p-1">
+                            <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off" @onclick="(() => candidate.CandidateExperiences.Remove(candidateExperience))">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h3>sin datos</h3>
+        }
+
+        <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" @onclick="(() => candidate.CandidateExperiences.Add(new Data.Models.EntityBases.CandidateExperienceBase()))">
+            Agregar +
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <button type="submit" class="btn btn-outline-success">Crear</button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-outline-danger" onclick="@(() => Cancel())">Cancelar</button>
+        </div>
+    </div>
+</EditForm>
+@code {
+    private CandidateViewModel candidate = new CandidateViewModel { CandidateExperiences = new List<Data.Models.EntityBases.CandidateExperienceBase>() };
+
+    private async void Submit()
+    {
+        var response = await Http.PostAsJsonAsync<CandidateViewModel>("api/Candidate", candidate);
+        if (response.IsSuccessStatusCode)
+        {
+            Nav.NavigateTo("/");
+        }
+    }
+
+    private void Cancel()
+    {
+        Nav.NavigateTo("/");
+    }
+}

@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPe.Data.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPe.Data.Models", "PandaPe.Data.Models\PandaPe.Data.Models.csproj", "{258AA0B5-8A34-4B90-8813-FCD1C7424B0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandaPe.UI.Server", "PandaPe.UI\Server\PandaPe.UI.Server.csproj", "{10D59F0F-4589-4133-A061-D91CFE018152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPe.UI.Server", "PandaPe.UI\Server\PandaPe.UI.Server.csproj", "{10D59F0F-4589-4133-A061-D91CFE018152}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandaPe.UI.Client", "PandaPe.UI\Client\PandaPe.UI.Client.csproj", "{0CA957EC-DD56-4E4B-B081-FF91F77FB511}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPe.UI.Client", "PandaPe.UI\Client\PandaPe.UI.Client.csproj", "{0CA957EC-DD56-4E4B-B081-FF91F77FB511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandaPe.UI.Shared", "PandaPe.UI\Shared\PandaPe.UI.Shared.csproj", "{FDA90D6E-F102-4BD0-BC87-867E391BCAD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPe.UI.Shared", "PandaPe.UI\Shared\PandaPe.UI.Shared.csproj", "{FDA90D6E-F102-4BD0-BC87-867E391BCAD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

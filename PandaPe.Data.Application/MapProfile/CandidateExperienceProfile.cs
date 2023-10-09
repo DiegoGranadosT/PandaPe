@@ -16,9 +16,12 @@ namespace PandaPe.Data.Application.MapProfile
         public CandidateExperienceProfile()
         {
             CreateMap<CandidateExperience, CreateCandidateExperienceCommand>().ReverseMap();
+            CreateMap<CandidateExperienceBase, CreateCandidateExperienceCommand>().ReverseMap();
             CreateMap<CandidateExperience, UpdateCandidateExperienceCommand>().ReverseMap();
+            CreateMap<CandidateExperienceBase, UpdateCandidateExperienceCommand>().ReverseMap();
             CreateMap<CandidateExperienceViewModel, CandidateExperience>().ReverseMap();
             CreateMap<CandidateExperienceViewModel, CandidateExperienceBase>().ReverseMap();
+            CreateMap<CandidateExperience, CandidateExperienceBase>().ReverseMap();
         }
     }
 }

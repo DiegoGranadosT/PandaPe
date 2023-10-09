@@ -20,7 +20,6 @@ namespace PandaPe.Data.Application.Feature.CandidateExperiences.Commands
         public string Job { get; set; }
         [MaxLength(4000)]
         public string Description { get; set; }
-        [MaxLength(8)]
         public double Salary { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime? EndDate { get; set; }

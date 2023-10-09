@@ -21,6 +21,7 @@ namespace PandaPe.Data.Application.Feature.Candidates.Commands
         public DateTime Birthdate { get; set; }
         [MaxLength(250)]
         public string Email { get; set; }
+        public List<CandidateExperienceBase>? CandidateExperiences { get; set; }
     }
 
     internal class CreateHandler : IRequestHandler<CreateCandidateCommand, CandidateViewModel>

@@ -1,13 +1,18 @@
 ﻿@using PandaPe.UI.Shared.ViewModels;
 @page "/"
 @inject HttpClient Http
-
+@inject NavigationManager Nav
 @if (candidates == null)
 {
     <p><em>Cargando...</em></p>
 }
 else
 {
+    <div class="row">
+        <div class="m-6">
+            <button type="button" class="btn btn-success" @onclick="(() => RedirecToCreate())">New create</button>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -15,6 +20,9 @@ else
                 <th>Apellido</th>
                 <th>Correo Electronico</th>
                 <th>Fecha de nacimiento</th>
+                <th>Editar</th>
+                <th>Visualizar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +33,21 @@ else
                     <td>@forecast.Surname</td>
                     <td>@forecast.Email</td>
                     <td>@forecast.Birthdate.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="button" @onclick="(() => RediredToCandidateEdit(forecast.Id))">
+                            Editar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="button" @onclick="(() => RediredToCandidate(forecast.Id))">
+                            Ver mas
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="button" @onclick="(() => DeleteCandidate(forecast.Id))">
+                            Eliminar
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -37,5 +60,32 @@ else
     protected override async Task OnInitializedAsync()
     {
         candidates = await Http.GetFromJsonAsync<List<CandidateViewModel>>("api/Candidate");
+    }
+
+    private void RedirecToCreate()
+    {
+        Nav.NavigateTo("candidate/create");
+    }
+
+    private void RediredToCandidate(int id)
+    {
+        Nav.NavigateTo($"candidate/{id}");
+
+    }
+    private void RediredToCandidateEdit(int id)
+    {
+        Nav.NavigateTo($"candidate/edit/{id}");
+    }
+
+    private async void DeleteCandidate(int id)
+    {
+        var response = await Http.DeleteAsync($"api/Candidate/{id}");
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            candidates.Remove(candidates.First(x => x.Id == id));  
+            base.StateHasChanged();
+
+        }
     }
 }

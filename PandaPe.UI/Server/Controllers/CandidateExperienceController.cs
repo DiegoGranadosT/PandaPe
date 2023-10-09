@@ -79,5 +79,20 @@ namespace PandaPe.UI.Server.Controllers
                 throw ex;
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<CandidateExperienceViewModel>> Delete(int id)
+        {
+            try
+            {
+                var response = await _mediator.Send(new DeleteCandidateExperienceCommand { Id = id });
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

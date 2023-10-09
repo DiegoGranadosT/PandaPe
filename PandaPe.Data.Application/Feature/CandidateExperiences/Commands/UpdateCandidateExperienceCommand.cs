@@ -21,7 +21,6 @@ namespace PandaPe.Data.Application.Feature.CandidateExperiences.Commands
         public string Job { get; set; }
         [MaxLength(4000)]
         public string Description { get; set; }
-        [MaxLength(8)]
         public double Salary { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
@@ -29,10 +28,10 @@ namespace PandaPe.Data.Application.Feature.CandidateExperiences.Commands
 
     internal class UpdateHandler : IRequestHandler<UpdateCandidateExperienceCommand, CandidateExperienceViewModel>
     {
-        private readonly IRepository<Candidate, int> _candidateRepo;
+        private readonly IRepository<CandidateExperience, int> _candidateRepo;
         private readonly IMapper _mapper;
 
-        public UpdateHandler(IRepository<Candidate, int> candidateRepo, IMapper mapper)
+        public UpdateHandler(IRepository<CandidateExperience, int> candidateRepo, IMapper mapper)
         {
             this._candidateRepo = candidateRepo;
             this._mapper = mapper;
@@ -44,7 +43,7 @@ namespace PandaPe.Data.Application.Feature.CandidateExperiences.Commands
                 var query = await _candidateRepo.Query().FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken) ?? throw new Exception("No existe el candidato");
                 var model = _mapper.Map(request, query);
 
-                await _candidateRepo.UpdateAsync(model, cancellationToken);
+                await _candidateRepo.UpdateAsync(model);
 
                 return _mapper.Map<CandidateExperienceViewModel>(model);
             }

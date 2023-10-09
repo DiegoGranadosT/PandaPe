@@ -81,12 +81,12 @@ namespace PandaPe.UI.Server.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<CandidateViewModel>> Delete(DeleteCandidateCommand request)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<CandidateViewModel>> Delete(int id)
         {
             try
             {
-                var response = await _mediator.Send(request);
+                var response = await _mediator.Send(new DeleteCandidateCommand { Id = id });
 
                 return Ok(response);
             }
